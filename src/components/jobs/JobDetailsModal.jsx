@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import JobApplicationModal from './JobApplicationModal';
 
 const JobDetailsModal = ({ job, onClose }) => {
+  const [showApplicationForm, setShowApplicationForm] = useState(false);
   
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -112,10 +114,7 @@ const JobDetailsModal = ({ job, onClose }) => {
             <button
               type="button"
               className="inline-flex w-full justify-center rounded-xl bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 sm:ml-3 sm:w-auto transition-colors"
-              onClick={() => {
-                alert('Application process would start here!');
-                onClose();
-              }}
+              onClick={() => setShowApplicationForm(true)}
             >
               Apply Now
             </button>
@@ -129,6 +128,17 @@ const JobDetailsModal = ({ job, onClose }) => {
           </div>
         </div>
       </div>
+
+      {showApplicationForm && (
+        <JobApplicationModal 
+          job={job} 
+          onClose={() => setShowApplicationForm(false)} 
+          onSuccess={() => {
+            setShowApplicationForm(false);
+            onClose();
+          }}
+        />
+      )}
     </div>
   );
 };

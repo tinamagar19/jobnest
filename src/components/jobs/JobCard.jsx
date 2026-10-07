@@ -67,3 +67,4 @@ const JobCard = ({ job, onClick }) => {
   );
 };
 
+export default JobCard;
