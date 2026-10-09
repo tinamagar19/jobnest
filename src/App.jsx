@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ApplicationProvider } from './context/ApplicationContext';
+import { JobProvider } from './context/JobContext';
 import MainLayout from './components/layout/MainLayout';
 import Home from './pages/Home';
 import Jobs from './pages/Jobs';
@@ -54,11 +55,13 @@ function AppRoutes() {
 function App() {
   return (
     <AuthProvider>
-      <ApplicationProvider>
-        <Router>
-          <AppRoutes />
-        </Router>
-      </ApplicationProvider>
+      <JobProvider>
+        <ApplicationProvider>
+          <Router>
+            <AppRoutes />
+          </Router>
+        </ApplicationProvider>
+      </JobProvider>
     </AuthProvider>
   );
 }

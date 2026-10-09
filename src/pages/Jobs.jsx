@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { mockJobs } from '../data/mockJobs';
+import { useJobs } from '../context/JobContext';
 import JobCard from '../components/jobs/JobCard';
 import JobDetailsModal from '../components/jobs/JobDetailsModal';
 import JobSearchFilter from '../components/jobs/JobSearchFilter';
@@ -9,9 +9,10 @@ const Jobs = () => {
   const [locationFilter, setLocationFilter] = useState('');
   const [typeFilter, setTypeFilter] = useState('');
   const [selectedJob, setSelectedJob] = useState(null);
+  const { jobs } = useJobs();
 
   const filteredJobs = useMemo(() => {
-    return mockJobs.filter(job => {
+    return jobs.filter(job => {
       const matchesSearch = 
         job.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
         job.company.toLowerCase().includes(searchTerm.toLowerCase());
